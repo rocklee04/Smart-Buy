@@ -19,3 +19,39 @@ document.querySelectorAll("#close").forEach((n) =>
     navMenu.classList.remove("active");
   })
 );
+
+
+  const signOutLink = document.getElementById('signOutLink');
+
+  // Attach click event handler to the "Sign Out" link
+  signOutLink.addEventListener('click', async () => {
+      const accessToken = localStorage.getItem('token'); // to get token from localStorage
+
+      try {
+          const response = await fetch('https://dark-red-hippopotamus-toga.cyclic.app/user/logout', {
+              method: 'DELETE',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ accessToken })
+          });
+
+          const data = await response.json();
+          if (response.ok) {
+              // Successfully logged out
+              alert(data.msg)
+              localStorage.removeItem('name')
+              // Optionally, perform any other actions you want after logging out
+          } else {
+              // Logout failed
+              alert(data.msg)
+          }
+      } catch (error) {
+          console.log(error)
+      }
+  });
+
+
+
+
+
