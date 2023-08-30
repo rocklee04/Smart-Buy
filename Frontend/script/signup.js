@@ -1,36 +1,7 @@
-// const onSignup= ()=>{
-
-//     const payload={
-
-//     name:document.getElementById("name").value,
-//      email:document.getElementById("Email").value,
-//       password:document.getElementById("Password").value
-
-//     }
-
-//     fetch("https://dark-red-hippopotamus-toga.cyclic.app/user//signup", {
-
-//     method: "POST",
-
-//     headers: {
-
-//     "Content-type":"application/json"
-
-//     },
-
-//     body: JSON.stringify(payload)
-
-//     }).then(res=>res.json())
-//      .then(res=>console.log(res)
-
-//      )
-//      alert("Signup Successfull")
-//    //  console.log(payload)
-//     .catch(err=>console.log(err))
-
-//     }
 
 const onSignup = document.getElementById("Signupbtn");
+
+//add event listener on signup button
 onSignup.addEventListener("click", async (e) => {
   e.preventDefault();
 
@@ -40,25 +11,27 @@ onSignup.addEventListener("click", async (e) => {
     password: document.getElementById("Password").value,
   };
 
-  console.log(payload);
-
+  const pattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   try {
-    let url = "https://dark-red-hippopotamus-toga.cyclic.app/user/signup";
 
-    let responce = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    if (pattern.test(payload.email)) {
+      let url = "https://dark-red-hippopotamus-toga.cyclic.app/user/signup";
 
-    let res = await responce.json();
-    console.log("res", res);
-    //   document.getElementById("from").reset()
-    localStorage.setItem("otp", res.OTP);
-    alert(` OTP send ${payload.email}`);
-    window.location.href = "../html/OTP.html";
+      let responce = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      let res = await responce.json();
+      localStorage.setItem("otp", res.OTP);
+      alert(` OTP send ${payload.email}`);
+      window.location.href = "../html/OTP.html";
+    } else {
+        alert("Invalid email address.");
+    }
   } catch (error) {
     console.log(error.message);
   }
