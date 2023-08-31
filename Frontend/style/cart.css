@@ -41,14 +41,18 @@
   }
   
   .mainCartContainer > #cart-container > div > #imgdiv {
-    width: 95%;
+    width: 100%;
+    height: 350px; /* Adjust the height as needed */
+    margin-bottom: 20px !important;
     margin: auto;
     overflow: hidden;
-  }
-  
-  .mainCartContainer > #cart-container > div > #imgdiv > img {
+}
+
+.mainCartContainer > #cart-container > div > #imgdiv > img {
     width: 100%;
-  }
+    height: 100%;
+    /* object-fit: cover; Maintain image aspect ratio */
+}
   
   .mainCartContainer > #cart-container > div > #deletebtn {
     display: block;
@@ -151,3 +155,37 @@
       grid-template-columns: repeat(2,1fr);
     }
   }
+
+  /* Responsive adjustments */
+
+@media screen and (max-width: 1024px) {
+  .mainCartContainer {
+      flex-direction: column;
+  }
+  .mainCartContainer > #cart-container {
+      grid-template-columns: repeat(2, 1fr);
+  }
+  .mainCartContainer > #cartdiv2 {
+      width: 90%;
+      margin: auto;
+      padding: 20px;
+  }
+  .mainCartContainer > #cartdiv2 > div:nth-child(1) {
+      padding: 8px;
+      font-size: 14px;
+      border-radius: 8px;
+  }
+  .mainCartContainer > #cartdiv2 > div:nth-child(2) {
+      margin-top: 20px;
+  }
+  .mainCartContainer > #cartdiv2 > div:nth-child(2) > div {
+      grid-template-columns: 1fr;
+      font-size: medium;
+      line-height: 30px;
+  }
+  .mainCartContainer > #cartdiv2 > div:nth-child(3) > a > button {
+      margin: 20px 0px;
+      padding: 8px;
+      font-size: 14px;
+  }
+}
