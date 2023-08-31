@@ -1,5 +1,5 @@
 
-let token = localStorage.getItem("token");
+const token = localStorage.getItem("token");
 let cartData = JSON.parse(localStorage.getItem("cart-data")) || [];
 const cartTotal = document.getElementById("cartTotal");
 let paginationWrapper = document.querySelector(".pagination-wrapper");
@@ -80,7 +80,7 @@ function productMaker(title, image, category, brand, material, price, rating, re
 
 
     <p class="rating_count">Review : ${rating}</p>
-    <button class="add" id="add" onclick=addToCart('${itemID}')>Add to cart</button>
+    <button class="add" id="add" onclick=addToCart('${itemID}')>ADD TO CART</button>
         
 
     </div>`

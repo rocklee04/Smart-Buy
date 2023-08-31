@@ -1,7 +1,8 @@
 // *************************** UserName ****************************
-const user = document.getElementById("username");
-const name = localStorage.getItem("name") || "Login First";
-user.innerText = "Hello," + "\n" + name;
+const username = document.getElementById("username");
+const name = localStorage.getItem("name")
+let token = localStorage.getItem("token");
+// user.innerText = "Hello," + "\n" + name;
 
 // ******************************** Cross Button ************************************
 const hamburger = document.querySelector(".hamburger");
@@ -21,36 +22,50 @@ document.querySelectorAll("#close").forEach((n) =>
 );
 
 
-  const signOutLink = document.getElementById('signOutLink');
+const profileIcon = document.querySelector("#nav1 div:nth-child(3) i");
+const profileLink = document.querySelector("#nav1 div:nth-child(3) a");
 
-  // Attach click event handler to the "Sign Out" link
-  signOutLink.addEventListener('click', async () => {
-      const accessToken = localStorage.getItem('token'); // to get token from localStorage
+if (username && token) {
+    user.innerText = "Hello,\n" + username;
+    // Show logout button
+    profileIcon.classList.remove("fa-user");
+    profileIcon.classList.add("fa-user-circle");
+    profileLink.href = "#";  // Modify this to your logout route or page
+    profileLink.innerHTML = '<i class="fa-solid fa-sign-out"></i>';
+    profileLink.addEventListener("click", async (e) => {
+        e.preventDefault();
+        try {
+            // Make a request to the /logout route
+            let url = "https://dark-red-hippopotamus-toga.cyclic.app/user/logout";
+            let response = await fetch(url, {
+                method: "Delete",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ accessToken: token }), // Send the access token in the body
+            });
 
-      try {
-          const response = await fetch('https://dark-red-hippopotamus-toga.cyclic.app/user/logout', {
-              method: 'DELETE',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ accessToken })
-          });
+            if (response.ok) {
+                // Clear user data from local storage
+                localStorage.removeItem("name");
+                localStorage.removeItem("token");
 
-          const data = await response.json();
-          if (response.ok) {
-              // Successfully logged out
-              alert(data.msg)
-              localStorage.removeItem('name')
-              // Optionally, perform any other actions you want after logging out
-          } else {
-              // Logout failed
-              alert(data.msg)
-          }
-      } catch (error) {
-          console.log(error)
-      }
-  });
-
+                // Redirect to home or login page
+                window.location.href = "./index.html"; // Change this to your desired page
+            } else {
+                console.log("Logout failed");
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    });
+} else {
+    user.innerText = "Hello, Sign in";
+    // Show signup/login links
+    profileIcon.classList.remove("fa-user-circle");
+    profileIcon.classList.add("fa-user");
+    profileLink.href = "./html/Signup.html";
+}
 
 
 

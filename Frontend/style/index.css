@@ -1,14 +1,15 @@
+#nav1 div:nth-child(2) p {
+  margin-top: 10px;
+}
+
 .addMain {
   width: 95%;
   margin: auto;
 }
 
-#add1 {
-  height: 500px;
-  background-image: url("https://m.media-amazon.com/images/I/71szSvIMZ0L._SX3000_.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  /* margin-top: 10px; */
+#add1 img{
+  width: 100%;
+  object-fit: cover;
 }
 
 #add1 a button {
@@ -112,18 +113,9 @@
   padding: 5px;
 }
 
-#add4 {
-  width: 100%;
-  height: 300px;
-  background-image: url("https://images-eu.ssl-images-amazon.com/images/G/31/IMG20/Home/2023/HomeMela/HSMMay/Customization-Banner-1500x300.jpg");
-  background-repeat: no-repeat;
-  /* background-size: cover; */
-  /* text-align: lef; */
-  margin-top: 5px;
-}
 #add4 img {
-  margin-left: 55%;
-  margin-top: 2%;
+  width: 100%;
+  object-fit: cover;
 }
 #add4 a button {
   margin-left: 72%;
@@ -484,3 +476,5 @@
     display: none;
   }
 }
+
+
