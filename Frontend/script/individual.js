@@ -1,4 +1,4 @@
-let token = localStorage.getItem("token");
+token = localStorage.getItem("token");
 let cartData = JSON.parse(localStorage.getItem("cart-data")) || [];
 let main = document.querySelector('.indi');
 
@@ -109,7 +109,7 @@ function fetchData() {
     })
 
     document.getElementById('addtowishlist').addEventListener('click', () => {
-        window.location.href = "../html/cart.html";
+        window.location.href = "./html/cart.html";
     });
 
     }

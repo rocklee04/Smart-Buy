@@ -26,7 +26,7 @@ const profileIcon = document.querySelector("#nav1 div:nth-child(3) i");
 const profileLink = document.querySelector("#nav1 div:nth-child(3) a");
 
 if (username && token) {
-    user.innerText = "Hello,\n" + username;
+    username.innerText = "Hello,\n" + name;
     // Show logout button
     profileIcon.classList.remove("fa-user");
     profileIcon.classList.add("fa-user-circle");
@@ -34,33 +34,45 @@ if (username && token) {
     profileLink.innerHTML = '<i class="fa-solid fa-sign-out"></i>';
     profileLink.addEventListener("click", async (e) => {
         e.preventDefault();
-        try {
-            // Make a request to the /logout route
-            let url = "https://dark-red-hippopotamus-toga.cyclic.app/user/logout";
-            let response = await fetch(url, {
-                method: "Delete",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ accessToken: token }), // Send the access token in the body
-            });
+        // try {
+        //     // Make a request to the /logout route
+        //     let url = "https://dark-red-hippopotamus-toga.cyclic.app/user/logout";
+        //     let response = await fetch(url, {
+        //         method: "Delete",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify({ accessToken: token }), // Send the access token in the body
+        //     });
 
-            if (response.ok) {
-                // Clear user data from local storage
-                localStorage.removeItem("name");
-                localStorage.removeItem("token");
+        //     if (response.ok) {
+        //         // Clear user data from local storage
+        //         localStorage.removeItem("name");
+        //         localStorage.removeItem("token");
 
-                // Redirect to home or login page
-                window.location.href = "./index.html"; // Change this to your desired page
-            } else {
-                console.log("Logout failed");
-            }
-        } catch (error) {
-            console.log(error.message);
-        }
+        //         // Redirect to home or login page
+        //         window.location.href = "./index.html"; // Change this to your desired page
+        //     } else {
+        //         console.log("Logout failed");
+        //     }
+        // } catch (error) {
+        //     console.log(error.message);
+        // }
+        localStorage.removeItem("name");
+        localStorage.removeItem("token");
+        Swal.fire({
+            icon: 'success',
+            title: 'Logout Successful',
+            text: 'You have successfully logout.',
+          }).then(() => {
+            // Redirect to home or login page
+            window.location.href = "./index.html"; 
+          });
+        
+        
     });
 } else {
-    user.innerText = "Hello, Sign in";
+    username.innerText = "Hello, Sign in";
     // Show signup/login links
     profileIcon.classList.remove("fa-user-circle");
     profileIcon.classList.add("fa-user");

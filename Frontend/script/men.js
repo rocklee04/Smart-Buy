@@ -1,5 +1,5 @@
 
-const token = localStorage.getItem("token");
+ token = localStorage.getItem("token");
 let cartData = JSON.parse(localStorage.getItem("cart-data")) || [];
 const cartTotal = document.getElementById("cartTotal");
 let paginationWrapper = document.querySelector(".pagination-wrapper");
@@ -270,10 +270,10 @@ function filterData(product) {
 
       if (Price[i].checked) {
         if (Price[i].value == 500) {
-          filteredProducts = product.filter((element) => element.price <= 50);
+          filteredProducts = product.filter((element) => element.price <= 500);
         } else if (Price[i].value == 1000) {
           filteredProducts = product.filter(
-            (element) => element.price > 50 && element.price <= 100
+            (element) => element.price > 500 && element.price <= 1000
           );
         } else if (Price[i].value == 1500) {
           filteredProducts = product.filter(
